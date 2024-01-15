@@ -61,10 +61,11 @@ class SimplePip {
   Future<bool> setAutoPipMode({
     aspectRatio = const [16, 9],
     seamlessResize = false,
+    autoEnter = true,
   }) async {
     Map params = {
       'aspectRatio': aspectRatio,
-      'autoEnter': true,
+      'autoEnter': autoEnter,
       'seamlessResize': seamlessResize,
     };
     final bool? setSuccessfully =

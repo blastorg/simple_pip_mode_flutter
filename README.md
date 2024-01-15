@@ -3,9 +3,17 @@
 
 A complete Picture-In-Picture mode plugin for android API level 26+ (Android Oreo).
 
+Big shout out to the original author of this library [@puntitOwO](https://www.github.com/puntitOwO), who created this library.
+
 Provides methods to check feature availability, enter PIP mode, callbacks for mode change and PIP Actions support.
 
 ![pip_example](https://user-images.githubusercontent.com/69210614/154329387-bd90ce0b-d563-4173-b2d0-2cbcc62b670c.gif)
+
+# Reasoning behind forking this library
+
+We have forked the library, becuase we could see that the library hasn't been actively worked on in two years time.
+
+In this version of the library, we shall incorporate changes that ensure future-facing compatibility and also allow extensions that could enable the library to cover more use-cases.
 
 # Features
 

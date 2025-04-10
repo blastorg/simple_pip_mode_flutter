@@ -3,6 +3,8 @@
 
 A complete Picture-In-Picture mode plugin for android API level 26+ (Android Oreo).
 
+Big shout out to the original author of this library [@puntitOwO](https://www.github.com/puntitOwO), who created this library.
+
 Provides methods to check feature availability, enter PIP mode, callbacks for mode change and PIP Actions support.
 
 [main.webm](https://github.com/user-attachments/assets/8d9dd33d-a008-41af-a663-579c3a9cae7d)
@@ -10,6 +12,12 @@ Provides methods to check feature availability, enter PIP mode, callbacks for mo
 [auto_enter.webm](https://github.com/user-attachments/assets/9704e36b-351d-440e-b66b-cf6ad1523d92)
 
 [actions.webm](https://github.com/user-attachments/assets/d171aaf5-2b21-4c49-9269-bd58cb3858b7)
+
+# Reasoning behind forking this library
+
+We have forked the library, becuase we could see that the library hasn't been actively worked on in two years time.
+
+In this version of the library, we shall incorporate changes that ensure future-facing compatibility and also allow extensions that could enable the library to cover more use-cases.
 
 # Features
 

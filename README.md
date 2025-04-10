@@ -7,7 +7,11 @@ Big shout out to the original author of this library [@puntitOwO](https://www.gi
 
 Provides methods to check feature availability, enter PIP mode, callbacks for mode change and PIP Actions support.
 
-![pip_example](https://user-images.githubusercontent.com/69210614/154329387-bd90ce0b-d563-4173-b2d0-2cbcc62b670c.gif)
+[main.webm](https://github.com/user-attachments/assets/8d9dd33d-a008-41af-a663-579c3a9cae7d)
+
+[auto_enter.webm](https://github.com/user-attachments/assets/9704e36b-351d-440e-b66b-cf6ad1523d92)
+
+[actions.webm](https://github.com/user-attachments/assets/d171aaf5-2b21-4c49-9269-bd58cb3858b7)
 
 # Reasoning behind forking this library
 
@@ -30,16 +34,31 @@ In the `dependencies:` section of your `pubspec.yaml`, add the following line:
   simple_pip_mode: <latest_version>
 ```
 
-# Usage
+# Table of contents
 
-This section has example code for the following tasks:
-* [Update manifest](#update-manifest)
-* [Verify PIP support](#verify-pip-support)
-* [Entering PIP mode](#entering-pip-mode)
-* [Enabling callbacks](#enabling-callbacks)
-* [Using callbacks](#using-callbacks)
-* [Using the PIP Widget](#using-the-pip-widget)
-* [Using PIP Actions](#using-pip-actions)
+- [Features](#features)
+- [Installation](#installation)
+- [Table of contents](#table-of-contents)
+- [Usage](#usage)
+  - [Update manifest](#update-manifest)
+  - [Verify pip support](#verify-pip-support)
+  - [Entering pip mode](#entering-pip-mode)
+  - [Setting automatic pip mode](#setting-automatic-pip-mode)
+  - [Enabling callbacks](#enabling-callbacks)
+    - [Activity wrapper](#activity-wrapper)
+      - [Kotlin](#kotlin)
+      - [Java](#java)
+    - [Callback helper](#callback-helper)
+      - [Kotlin](#kotlin-1)
+      - [Java](#java-1)
+  - [Using callbacks](#using-callbacks)
+  - [Using the PIP widget](#using-the-pip-widget)
+  - [Using PIP Actions](#using-pip-actions)
+- [Notes](#notes)
+  - [Multi-platform apps](#multi-platform-apps)
+- [Contribute](#contribute)
+
+# Usage
 
 ## Update manifest
 
@@ -90,7 +109,7 @@ This way, when user presses home (or uses home gesture), the app enters PIP mode
 
 There's two ways of enabling callbacks:
 * [Activity wrapper](#activity-wrapper) (Recommended!)
-* [Callback helper](#callback-helper)
+* [Callback helper](#callback-helper) (The old, manual way)
 
 ### Activity wrapper 
 
@@ -178,16 +197,18 @@ SimplePip _pip = SimplePip(
 To use the widget, you need to [enable callbacks](#enabling-callbacks) first.
 Import `pip_widget.dart` file. 
 
-Add a `PipWidget` widget to your tree and give it a `builder` or a `child`, and a `pipBuilder` or a `pipChild`.
+Add a `PipWidget` widget to your tree and give it a `child` and a `pipChild`.
+
+> [!Note]
+> `builder` and `pipBuilder` are deprecated. Use a `Builder` as the `child` or `pipChild` instead.
+
 ```dart
 import 'package:simple_pip_mode/pip_widget.dart';
 class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PipWidget(
-      builder: (context) => Text('This is built when PIP mode is not active'),
-      child: Text('This widget is not used because builder is not null'),
-      //pipBuilder: (context) => Text('This is built when PIP mode is active'),
-      pipChild: Text('This widget is used because pipBuilder is null'),
+      child: Text('This is built when PIP mode is not active'),
+      pipChild: Text('This is built when PIP mode is active'),
     );
   }
 }
@@ -197,7 +218,7 @@ You can also pass callbacks directly to `PipWidget`.
 ## Using PIP Actions
 
 To use PIP actions, you need to specify a `pipLayout` preset on your `PipWidget`. 
-The current available action layout presets are focused on giving support to media reproduction controls. They are `media`, `media_only_pause` and `media_live`. Those are defined on the `[PipActionsLayout]` enum.
+The current available action layout presets are focused on giving support to media reproduction controls. They are `media`, `media_only_pause`, `media_live` and `mediaWithSeek10`. Those are defined on the `[PipActionsLayout]` enum.
 
 You can also add a `onPipAction` listener to handle actions callbacks from `PipWidget`. This can be defined on `SimplePip(onPipAction: ...)` too.
 ```dart
@@ -213,14 +234,16 @@ class MyWidget extends StatelessWidget {
         switch (action) {
           case PipAction.play:
             // example: videoPlayerController.play();
-            break;
           case PipAction.pause:
             // example: videoPlayerController.pause();
-            break;
           case PipAction.next:
             // example: videoPlayerController.next();
           case PipAction.previous:
             // example: videoPlayerController.previous();
+          case PipAction.rewind:
+            // example: videoPlayerController.seek(-10);
+          case PipAction.forward:
+            // example: videoPlayerController.seek(10);
           default:
             break;
         }
@@ -248,6 +271,10 @@ Calling `SimplePip` methods on a non-Android device will raise a `MissingPluginE
 
 # Contribute
 
-Huge thanks to [Erick Daros](https://github.com/erickdaros) for PIP Actions feature.
+Huge thanks to:
+* [Erick Daros](https://github.com/erickdaros) for PIP Actions feature.
+* [song011794](https://github.com/song011794) for updating the plugin to Android 14.
+* [af-ffr](https://github.com/af-ffr) for updating the plugin to add auto enter parameter.
+* [kmartins](https://github.com/kmartins) for updating the plugin to add more actions.
 
-I'm currently working on more features, so issues and pull requests are appreciated!
+Issues and pull requests are appreciated!

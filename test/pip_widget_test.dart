@@ -16,16 +16,16 @@ void main() {
         MaterialApp(
           home: PipWidget(
             builder: (_) => const Text('builder'),
-            child: const Text('child'),
             pipBuilder: (_) => const Text('pipbuilder'),
             pipChild: const Text('pipchild'),
+            child: const Text('child'),
           ),
         ),
       );
       final PipWidgetState state = tester.state(find.byType(PipWidget));
       SimplePip pip = state.pip;
 
-      TestDefaultBinaryMessengerBinding.instance!.defaultBinaryMessenger
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
           .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         switch (methodCall.method) {
           case 'enterPipMode':
@@ -68,15 +68,15 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: PipWidget(
-            child: Text('child'),
             pipChild: Text('pipchild'),
+            child: Text('child'),
           ),
         ),
       );
       final PipWidgetState state = tester.state(find.byType(PipWidget));
       SimplePip pip = state.pip;
 
-      TestDefaultBinaryMessengerBinding.instance!.defaultBinaryMessenger
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
           .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         switch (methodCall.method) {
           case 'enterPipMode':
